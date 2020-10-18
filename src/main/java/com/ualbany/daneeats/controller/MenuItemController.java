@@ -30,8 +30,6 @@ public class MenuItemController {
     MenuItem item = new MenuItem();  
     item.setName(name);
     item.setPrice(price);
-    item.setCalories(calories);
-    item.setDescription(description);
     service.save(item);
     return "Saved";
   }
@@ -48,8 +46,6 @@ public class MenuItemController {
 			jsonObject.put("id", item.getId());
 			jsonObject.put("name", item.getName());
 			jsonObject.put("price", item.getPrice());
-			jsonObject.put("calories", item.getCalories());
-			jsonObject.put("description", item.getDescription());
 			jsonObject.put("restaurant", item.getRestaurantId());
 			jsonArray.put(jsonObject);
 		}
@@ -63,8 +59,6 @@ public class MenuItemController {
 	  jsonObject.put("id", item.getId());
 	  jsonObject.put("name", item.getName());
 	  jsonObject.put("price", item.getPrice());
-	  jsonObject.put("calories", item.getCalories());
-	  jsonObject.put("description", item.getDescription());
 	  jsonObject.put("restaurant", item.getRestaurantId());
     return jsonObject.toString();
   }

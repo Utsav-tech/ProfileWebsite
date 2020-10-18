@@ -1,11 +1,14 @@
 package com.ualbany.daneeats.model;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
@@ -16,118 +19,79 @@ public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer Id;
-
-    private Integer customerId;
+    private Integer orderId;
+    
+	@ManyToOne
+    private User user;
 
     private Integer agentId;
     
-    private Integer menuId;
-
-    private Integer status;
-
-    private Double receive;
-
-    private Double pay;
-
-    private String source;
-
-    private String destination;
-
-    private Date created;
-	private Date updated;
-	
-    @PrePersist
-    protected void onCreate() {
-      setCreated(new Date());
-    }
-	
-	@PreUpdate
-	protected void onUpdate() {
-	  setUpdated(new Date());
-	}
-
-    public Integer getId(){
-        return Id;
-    }
-
-    public Integer getCustomerId(){
-        return customerId;
-    }
-
-    public void setCustomerId(Integer customerId){
-        this.customerId = customerId;
-    }
+    private Double price;
     
-    public Integer getAgentId(){
-        return agentId;
-    }
-
-    public void setAgentId(Integer agentId){
-        this.agentId = agentId;
-    }
-
-    public Integer getStatus(){
-        return status;
-    }
-
-    public void setStatus(Integer status){
-        this.status = status;
-    }
-
-    public Double getReceive(){
-        return receive;
-    }
-
-    public void setReceive(Double receive){
-        this.receive = receive;
-    }
-
-    public Double getPay(){
-        return pay;
-    }
-
-    public void setPay(Double pay){
-        this.pay = pay;
-    }
-
-    public String getSource(){
-        return source;
-    }
-
-    public void setSource(String source){
-        this.source = source;
-    }
-
-    public String getDestination(){
-        return destination;
-    }
-
-    public void setDestination(String destination){
-        this.source = destination;
-    }
+    private String address;
     
-	public Integer getMenuId() {
-		return menuId;
+    private String status;
+    
+    private Double quantity;
+    
+    public Double getQuantity() {
+		return quantity;
 	}
 
-	public void setMenuId(Integer menuId) {
-		this.menuId = menuId;
+	public void setQuantity(Double quantity) {
+		this.quantity = quantity;
 	}
 
-	public Date getCreated() {
-		return created;
+	public Integer getOrderId() {
+		return orderId;
 	}
 
-	public void setCreated(Date created) {
-		this.created = created;
+	public void setOrderId(Integer orderId) {
+		this.orderId = orderId;
 	}
 
-	public Date getUpdated() {
-		return updated;
+	public Integer getAgentId() {
+		return agentId;
+	}
+	public User getUser() {
+		return user;
 	}
 
-	public void setUpdated(Date updated) {
-		this.updated = updated;
+	public void setUser(User user) {
+		this.user = user;
 	}
+	public void setAgentId(Integer agentId) {
+		this.agentId = agentId;
+	}
+
+	public Double getPrice() {
+		return price;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	
+    
+   
+    
+   
+  
 }

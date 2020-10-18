@@ -4,8 +4,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "MenuItem")
 public class MenuItem {
 
     @Id
@@ -16,9 +18,7 @@ public class MenuItem {
 
     private Double price;
 
-    private Integer calories;
-
-    private String description;
+  
 
     private Integer restaurantId;
 
@@ -42,21 +42,7 @@ public class MenuItem {
         this.price = price;
     }
 
-    public Integer getCalories(){
-        return calories;
-    }
-
-    public void setCalories(Integer calories){
-        this.calories = calories;
-    }
-
-    public String getDescription(){
-        return description;
-    }
-
-    public void setDescription(String description){
-        this.description = description;
-    }
+   
 
     public Integer getRestaurantId(){
         return restaurantId;

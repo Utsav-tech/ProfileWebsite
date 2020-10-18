@@ -53,15 +53,17 @@
     var setAllProducts = function(products){
       localStorage.products = JSON.stringify(products);
     }
-    var addProduct = function(id, name, summary, price, quantity, image) {
+    var addProduct = function(id, name, image, summary, price, quantity, source, destination) {
       var products = getAllProducts();
       products.push({
         id: id,
         name: name,
+        image: image,
         summary: summary,
         price: price,
         quantity: quantity,
-        image: image
+        source: source,
+        destination: destination
       });
       setAllProducts(products);
     }
@@ -87,7 +89,7 @@
       setAllProducts(products);
       return true;
     }
-    var setProduct = function(id, name, summary, price, quantity, image) {
+    var setProduct = function(id, name, image, summary, price, quantity, source, destination) {
       if(typeof id === "undefined"){
         console.error("id required")
         return false;
@@ -96,8 +98,8 @@
         console.error("name required")
         return false;
       }
-      if(typeof image === "undefined"){
-        console.error("image required")
+   	 if(typeof image === "undefined"){
+        console.error("name required")
         return false;
       }
       if(!$.isNumeric(price)){
@@ -111,7 +113,7 @@
       summary = typeof summary === "undefined" ? "" : summary;
 
       if(!updatePoduct(id)){
-        addProduct(id, name, summary, price, quantity, image);
+        addProduct(id, name, image, summary, price, quantity, source, destination);
       }
     }
     var clearProduct = function(){
@@ -333,12 +335,14 @@
 
       var id = $target.data('id');
       var name = $target.data('name');
+      var image = $target.data('image');
       var summary = $target.data('summary');
       var price = $target.data('price');
       var quantity = $target.data('quantity');
-      var image = $target.data('image');
+      var source = $target.data('source');
+      var destination = $target.data('destination');
 
-      ProductManager.setProduct(id, name, summary, price, quantity, image);
+      ProductManager.setProduct(id, name, image, summary, price, quantity, source, destination);
       $cartBadge.text(ProductManager.getTotalQuantityOfProduct());
     });
 

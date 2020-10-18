@@ -70,14 +70,51 @@ $(function () {
     });
   }
 
+  var saveOrder = function(order){
+    	
+    	// DO POST
+    	$.ajax({
+			type : "POST",
+			contentType : "application/json",
+			url : window.origin + "/customer/save",
+			data : JSON.stringify(order),
+  			dataType : 'json',
+			success : function(result) {
+				if(result.status == "Done"){
+					alert("Success!")
+				}else{
+					alert("Error!");
+				}
+				console.log(result);
+			},
+			error : function(e) {
+				alert("Error!")
+				console.log("ERROR: ", e);
+			}
+		});	
+    }
+
   $('.my-cart-btn').myCart({
     classCartIcon: 'my-cart-icon',
     classCartBadge: 'my-cart-badge',
     affixCartIcon: true,
     checkoutCart: function(products) {
+      let items = [];
+      let total = 0;
       $.each(products, function(){
+        let item = {};
+        item["menuId"] = this.id;
+		item["quantity"] = this.quantity; 
+		items.push(item); 
+		total += this.quantity * this.price;      
         console.log(this);
       });
+      let order = {};
+      order["customerId"] = 1;
+      order["price"] = total;
+      order["destination"] = "Duch Quad";
+      order["items"] = items;
+      saveOrder(order);
     },
     clickOnAddToCart: function($addTocart){
       goToCartIcon($addTocart);

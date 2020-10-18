@@ -68,8 +68,6 @@ public class RestaurantController {
 				jsonObject.put("id", item.getId());
 				jsonObject.put("name", item.getName());
 				jsonObject.put("price", item.getPrice());
-				jsonObject.put("calories", item.getCalories());
-				jsonObject.put("description", item.getDescription());
 				jsonObject.put("restaurant", restaurant.getName());
 				jsonArray.put(jsonObject);
 			}

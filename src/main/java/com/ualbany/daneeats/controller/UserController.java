@@ -56,21 +56,14 @@ public class UserController {
         return "home";
     }
 
-    
-    
-    @GetMapping("/Customer-login")
-    public String customerlogin(Model model, String error, String logout) {
-        
-        return "Customerlogin";
-    }
-    @GetMapping("/Delivery-login")
-    public String deliverylogin(Model model, String error, String logout) {
-        
-        return "Deliverylogin";
-    }
     @PostMapping("/Customer-login")//for both /,welcome this will be called
-    public String welcomecustomer(Model model) {
-        return "CustomerProfile";
+    public String landingcustomer(Model model) {
+        return "customer";
+    }
+    
+    @GetMapping("/Customer-login")//for both /,welcome this will be called
+    public String customer(Model model) {
+        return "customer";
     }
     @PostMapping("/Delivery-login")//for both /,welcome this will be called
     public String welcomedelivery(Model model) {
