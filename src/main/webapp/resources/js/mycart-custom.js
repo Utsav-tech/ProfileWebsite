@@ -76,12 +76,12 @@ $(function () {
     	$.ajax({
 			type : "POST",
 			contentType : "application/json",
-			url : window.origin + "/customer/save",
+			url : window.origin + "/api/order/save",
 			data : JSON.stringify(order),
   			dataType : 'json',
 			success : function(result) {
 				if(result.status == "Done"){
-					alert("Success!")
+					console.log("Saved:result.data ");
 				}else{
 					alert("Error!");
 				}

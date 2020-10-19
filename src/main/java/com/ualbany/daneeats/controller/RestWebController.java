@@ -22,20 +22,20 @@ public class RestWebController {
 	@Autowired
 	OrderService  orderservice;
 	
-
-	@PostMapping(value = "/customer/save")
-	public Response postCustomer(@RequestBody String items) {
+	@PostMapping(value = "/order/save")
+	public Response postCustomer(@RequestBody String order) {
 		//cust.add(customer);
-		JSONArray array = new JSONArray(items); 
-		JSONObject object = array.getJSONObject(0);
+		JSONObject jsonObj = new JSONObject(order.toString());
 		Order ord = new Order();
 		User user = new User();
+		user.setId((long) jsonObj.getInt("customerId"));
+		ord.setOrderId(1);
 		ord.setUser(user);
-		ord.setQuantity(object.getDouble("quantity"));
-		ord.setPrice(object.getDouble("price"));
+		ord.setQuantity((double) 1);
+		ord.setPrice(jsonObj.getDouble("price"));
 		orderservice.save(ord); 
 		// Create Response Object
-		Response response = new Response("Done", items);
+		Response response = new Response("Done", jsonObj);
 		return response;
 	}
 }

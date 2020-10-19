@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -36,7 +37,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 		"/changePassD.jsp","/Action.jsp","/index.html","img/pizza-1.png","img/pizza-2.png","img/pizza-3.png","img/pizza-4.png","img/screenshot.jpg",
                 		"img/logo.png","img/icon.png","img/cart.svg","/jquery.min.js","/mycart.js","/mycart-custom.js","custom-general.js",
                 		"img/restaurant.png","img/restaurant.png","img/customer_banner.jpg","img/babas.jpg","img/fg.png","/css/style.css","/css/bootstrap.min.css",
-                		"img/damiens.jpg", "img/damiens.jpg","img/umaisushi.jpg", "img/customer_banner.jpg","/customer/menu","/api/customer/save","/customer/pastorders",
+                		"img/damiens.jpg", "img/damiens.jpg","img/umaisushi.jpg", "img/customer_banner.jpg","/customer/menu", "/customer/pastorders",
                 		"img/cart.svg","js/jquery.min.js","js/mycart.js","js/mycart-custom.js","custom-general.js","/customer/currentorders","css/style.css",
                 		"/customer/profile", "/customer/placeorder","/menu.html","/customer/save").permitAll()
                 .anyRequest().authenticated()
@@ -50,6 +51,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll();
     }
 
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers("/api/order/save");
+    }
+    
     @Bean
     public AuthenticationManager customAuthenticationManager() throws Exception {
         return authenticationManager();
