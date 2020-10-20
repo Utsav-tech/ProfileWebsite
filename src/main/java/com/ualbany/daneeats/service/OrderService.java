@@ -26,6 +26,10 @@ public class OrderService {
     		return null;
     }
 
+    public List<Order> findByStatus(String str,Integer id) {
+    	List<Order> order= repository.findByStatusAndAgentId(str,id);
+    	return order;
+    }
     public List<Order> findAll() {
     	List<Order> orders = repository.findAll();
         return orders;

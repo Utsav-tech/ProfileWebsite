@@ -212,8 +212,12 @@ code {
       <i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-content">
-      <a href="#">Current Orders</a>
-      <a href="#">Previous Orders</a>
+      <center>
+      <a href="${contextPath}/delivery/availableorders">Available Orders</a>
+   <a href="${contextPath}/delivery/currentorders">Current Orders</a>
+   <a href="${contextPath}/delivery/previousordersd">Previous Orders</a>
+</center>
+      
     </div>
   </div> 
 </div><br><br>
@@ -235,7 +239,7 @@ code {
 <div class="flip-card">
   <div class="flip-card-inner">
     <div class="flip-card-front">
-      <img src="dane.jpg" alt="Avatar" style="width:300px;height:300px;">
+      <img src="/resources/img/dane.jpg" alt="Avatar" style="width:300px;height:300px;">
     </div>
     <div class="flip-card-back">
       <h1>Great Dane</h1> 
