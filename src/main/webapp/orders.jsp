@@ -51,15 +51,28 @@
                     <div class="block menu1">
                         <!-- Start Restaurant list -->
                         <div class="menu menu--is-visible" id="pizzaMenu" data-aos="fade-up">
-                        	<c:forEach var="order" items="${orders}">
-	                        	<div class="item row align-items-center">
-	                                <p>Id: "${order.orderId}"</p>
-	                                <p>AgentId: ${order.agentId}</p>
-	                                <p>Quantity: ${order.quantity}</p>
-	                                <p>Price: ${order.price}</p>
-	                                <p>Status: ${order.status}</p>
-	                            </div>
-                     		</c:forEach>
+                        	<table class="table">
+							  <thead class="thead-dark">
+							    <tr>
+							      <th scope="col">Order Id</th>
+							      <th scope="col">Agent Id</th>
+							      <th scope="col">Quantity</th>
+							      <th scope="col">Price</th>
+							      <th scope="col">Status</th>
+							    </tr>
+							  </thead>
+							  <tbody>
+							  	<c:forEach var="order" items="${orders}">
+		                        	<tr>
+		                                <td>${order.orderId}"</td>
+		                                <td>${order.agentId}</td>
+		                                <td>${order.quantity}</td>
+		                                <td>${order.price}</td>
+		                                <td>${order.status}</td>
+	                                </tr>
+	                     		</c:forEach>
+							  </tbody>
+							</table>
                      	</div>
                         <!-- End Pizza Menu -->
                     </div>

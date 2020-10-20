@@ -33,6 +33,7 @@ public class RestWebController {
 		ord.setUser(user);
 		ord.setQuantity((double) 1);
 		ord.setPrice(jsonObj.getDouble("price"));
+		ord.setStatus("init");
 		orderservice.save(ord); 
 		// Create Response Object
 		Response response = new Response("Done", jsonObj);

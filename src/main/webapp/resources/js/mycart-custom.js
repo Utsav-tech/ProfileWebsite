@@ -81,7 +81,7 @@ $(function () {
   			dataType : 'json',
 			success : function(result) {
 				if(result.status == "Done"){
-					console.log("Saved:result.data ");
+					console.log("Saved:result.data");
 				}else{
 					alert("Error!");
 				}
