@@ -46,7 +46,7 @@ public class MenuItemController {
 			jsonObject.put("id", item.getId());
 			jsonObject.put("name", item.getName());
 			jsonObject.put("price", item.getPrice());
-			jsonObject.put("restaurant", item.getRestaurantId());
+			jsonObject.put("restaurant", item.getRestaurant().getId());
 			jsonArray.put(jsonObject);
 		}
 		return jsonArray.toString();
@@ -59,7 +59,7 @@ public class MenuItemController {
 	  jsonObject.put("id", item.getId());
 	  jsonObject.put("name", item.getName());
 	  jsonObject.put("price", item.getPrice());
-	  jsonObject.put("restaurant", item.getRestaurantId());
+	  jsonObject.put("restaurant", item.getRestaurant().getId());
     return jsonObject.toString();
   }
 }

@@ -3,11 +3,10 @@ package com.ualbany.daneeats.model;
 import javax.persistence.*;
 
 @Entity
-public class Profile {
+public class Profile  extends Persistable {
  
-    @Id
-    private Integer Id;
-
+	private User user;
+	
     private String firstname;
 
     private String lastname;
@@ -19,13 +18,15 @@ public class Profile {
     private String address2;
 
     private String image;
-
-    public Integer getId(){
-        return Id;
+ 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "userId")
+    public User getUser() {
+        return user;
     }
 
-    public void setId(Integer Id){
-        this.Id = Id;
+    public void setUser(User user) {
+        this.user = user;
     }
     
     public String getFirstName(){

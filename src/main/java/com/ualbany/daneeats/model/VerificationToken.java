@@ -20,7 +20,7 @@ public class VerificationToken {
     private LocalDateTime confirmedDateTime;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "userId")
     private User user;
 
     public VerificationToken(){

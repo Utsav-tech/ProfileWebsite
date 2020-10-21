@@ -1,97 +1,112 @@
 package com.ualbany.daneeats.model;
 
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
 
 @Entity(name = "Order")
 @Table(name = "Orders")
-public class Order {
+public class Order extends Persistable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer orderId;
+    private User customer;
+
+    private User agent;
     
-	@ManyToOne
-    private User user;
+    private OrderStatus status;
 
-    private Integer agentId;
+    private double amount;
+
+    private String source;
+
+    private String destination;
+	
+    private List<OrderItem> items = new ArrayList<OrderItem>();
     
-    private Double price;
-    
-    private String address;
-    
-    private String status;
-    
-    private Double quantity;
-    
-    public Double getQuantity() {
-		return quantity;
+	public Double getAmount() {
+		return amount;
 	}
 
-	public void setQuantity(Double quantity) {
-		this.quantity = quantity;
+	public void setAmount(Double amount) {
+		this.amount = amount;
 	}
 
-	public Integer getOrderId() {
-		return orderId;
+	@ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "customerId", nullable = false, updatable = false)
+	public User getCustomer() {
+		return customer;
 	}
 
-	public void setOrderId(Integer orderId) {
-		this.orderId = orderId;
+	public void setCustomer(User customer) {
+		this.customer = customer;
 	}
 
-	public Integer getAgentId() {
-		return agentId;
-	}
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-	public void setAgentId(Integer agentId) {
-		this.agentId = agentId;
+	@ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "agentId")
+	public User getAgent() {
+		return agent;
 	}
 
-	public Double getPrice() {
-		return price;
+	public void setAgent(User agent) {
+		this.agent = agent;
 	}
 
-	public void setPrice(Double price) {
-		this.price = price;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	public String getStatus() {
+	@Column(name = "orderStatus")
+    @Enumerated(EnumType.STRING)
+	public OrderStatus getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(OrderStatus status) {
 		this.status = status;
 	}
 
+	public String getSource() {
+		return source;
+	}
+
+	public void setSource(String source) {
+		this.source = source;
+	}
+
+	public String getDestination() {
+		return destination;
+	}
+
+	public void setDestination(String destination) {
+		this.destination = destination;
+	}
 	
-    
-   
-    
-   
-  
+    @OneToMany(cascade=CascadeType.ALL)
+    @JoinColumn(name="orderId")
+	public List<OrderItem> getItems() {
+		return items;
+	}
+	
+	public void setItems(List<OrderItem> items) {
+		for (OrderItem orderItem : items) {
+			orderItem.setOrder(this);
+			this.items.add(orderItem);
+		}
+	}
+	
+	public void addOrderItem(OrderItem item) {
+		item.setOrder(this);
+		this.items.add(item);
+	}
+	
+	public void removeOrderItem(OrderItem item) {
+		this.items.remove(item);
+		item.setOrder(null);
+	}
 }

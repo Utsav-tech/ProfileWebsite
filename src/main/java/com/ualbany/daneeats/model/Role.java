@@ -1,41 +1,57 @@
 package com.ualbany.daneeats.model;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
-@Table(name = "Rolesindb")
-public class Role {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+@Table(name = "UserRoles")
+public class Role extends Persistable {
 
-    private String name;
+    private User user;
 
-    @ManyToMany(mappedBy = "roles")
-    private Set<User> users;
+    private UserRoleType roleType;
 
-    public Long getId() {
-        return id;
-    }
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "userId")
+	public User getUser() {
+		return user;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public void setUser(User user) {
+		this.user = user;
+	}
 
-    public String getName() {
-        return name;
-    }
+	@Enumerated(EnumType.STRING)
+	public UserRoleType getRoleType() {
+		return roleType;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setRoleType(UserRoleType roleType) {
+		this.roleType = roleType;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!(obj instanceof Role))
+			return false;
+		boolean equalIds = this.getId() != null && getId().equals(((Role) obj).getId());
+		boolean equalusers = this.user.getId() == ((Role) obj).getUser().getId();
+		boolean equaltypes = this.roleType == ((Role) obj).getRoleType();
+		return equalIds && equalusers && equaltypes;
+	}
 
-    public Set<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Set<User> users) {
-        this.users = users;
-    }
+	@Override
+	public int hashCode() {
+		int hash = 7;
+		hash = 31 * hash + getId().hashCode();
+		hash = 31 * hash + user.hashCode();
+		hash = 31 * hash + roleType.hashCode();
+		return hash;
+	}
+	
+	@Override
+	public String toString() {
+		return "User:"+ user.getUserName() +" Role:"+ roleType.toString();
+	}
 }

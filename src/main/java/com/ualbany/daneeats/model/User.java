@@ -1,79 +1,58 @@
 package com.ualbany.daneeats.model;
-import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.UniqueConstraint;
 
+@Entity(name = "User")
+@Table(uniqueConstraints = { @UniqueConstraint(columnNames = {"email", "userName"}) })
+public class User extends Persistable {
 
-import java.util.Set;
-
-@Entity
-@Table(name = "Usersindb")
-public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Long id;
-    
-    @OneToMany(mappedBy ="user")
-    private Set<Order> order;
-
-    private String username;
-    
-    private String password;
-    
-    
+	private String userName;
 	private String email;
-	
-	private Boolean isActive;
-	
-	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+	private String password;
     private VerificationToken verificationToken;
+    private Boolean isActive;
 	
-    public Boolean getIsActive() {
-		return isActive;
+    @Transient//this field will not be saved in the database.
+    private String passwordConfirm;
+
+    private List<Role> roles = new ArrayList<Role>();
+
+    @Column(nullable = false)
+	public String getUserName() {
+		return this.userName;
 	}
 
-	public void setIsActive(Boolean isActive) {
-		this.isActive = isActive;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
+	@Column(name = "email", unique = true, nullable = false)
 	public String getEmail() {
-		return email;
+		return this.email;
 	}
 
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
+	@Column(name = "password")
+	public String getPassword() {
+		return this.password;
+	}
 
-
-    @Transient//this field will not be saved in the database.
-    private String passwordConfirm;
-
-    @ManyToMany
-    private Set<Role> roles;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
     public String getPasswordConfirm() {
         return passwordConfirm;
@@ -83,13 +62,31 @@ public class User {
         this.passwordConfirm = passwordConfirm;
     }
 
-    public Set<Role> getRoles() {
+    @OneToMany(cascade=CascadeType.ALL)
+    @JoinColumn(name="userId")
+    public List<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
+    public void setRoles(List<Role> roles) {
+    	for (Role role : roles) {
+			role.setUser(this);
+			this.roles.add(role);
+		}
     }
+    
+    public void addRole(Role role) {
+    	role.setUser(this);
+    	this.roles.add(role);
+    }
+    
+    public void removeRole(Role role) {
+    	this.roles.remove(role);
+    	role.setUser(null);
+    }
+    
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="userId")
     public VerificationToken getVerificationToken() {
         return verificationToken;
     }
@@ -97,4 +94,12 @@ public class User {
     public void setVerificationToken(VerificationToken verificationToken) {
         this.verificationToken = verificationToken;
     }
+
+	public Boolean getIsActive() {
+		return isActive;
+	}
+
+	public void setIsActive(Boolean isActive) {
+		this.isActive = isActive;
+	}
 }
