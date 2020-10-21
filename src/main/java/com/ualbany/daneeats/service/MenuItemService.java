@@ -26,7 +26,7 @@ public class MenuItemService {
         return repository.findAll();
     }
     
-    public MenuItem findById(Integer id) {
+    public MenuItem findById(Long id) {
     	Optional<MenuItem> item= repository.findById(id);
     	if(item.isPresent())
     		return item.get();

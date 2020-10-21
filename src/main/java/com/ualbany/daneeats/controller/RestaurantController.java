@@ -56,7 +56,7 @@ public class RestaurantController {
 	  }
 	  
 	  @GetMapping(path="/allitems")
-	  public @ResponseBody String getAllItemsById(@RequestParam Integer id) {
+	  public @ResponseBody String getAllItemsById(@RequestParam Long id) {
 
 			List<MenuItem> menuItems = service.findAllMenuItems(id);
 			Restaurant restaurant = service.findById(id);

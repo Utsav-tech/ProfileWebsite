@@ -18,7 +18,7 @@ public class OrderService {
     	repository.save(o);
     }
 
-    public Order findById(Integer id) {
+    public Order findById(Long id) {
     	Optional<Order> Order= repository.findById(id);
     	if(Order.isPresent())
     		return Order.get();

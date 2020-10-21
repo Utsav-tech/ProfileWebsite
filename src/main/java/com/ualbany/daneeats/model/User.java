@@ -13,10 +13,10 @@ import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
 @Entity(name = "User")
-@Table(uniqueConstraints = { @UniqueConstraint(columnNames = {"email", "userName"}) })
+@Table(uniqueConstraints = { @UniqueConstraint(columnNames = {"email", "username"}) })
 public class User extends Persistable {
 
-	private String userName;
+	private String username;
 	private String email;
 	private String password;
     private VerificationToken verificationToken;
@@ -28,12 +28,12 @@ public class User extends Persistable {
     private List<Role> roles = new ArrayList<Role>();
 
     @Column(nullable = false)
-	public String getUserName() {
-		return this.userName;
+	public String getUsername() {
+		return this.username;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setUsername(String userName) {
+		this.username = userName;
 	}
 
 	@Column(name = "email", unique = true, nullable = false)
@@ -69,10 +69,7 @@ public class User extends Persistable {
     }
 
     public void setRoles(List<Role> roles) {
-    	for (Role role : roles) {
-			role.setUser(this);
-			this.roles.add(role);
-		}
+    	this.roles = roles;
     }
     
     public void addRole(Role role) {

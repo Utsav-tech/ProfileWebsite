@@ -1,18 +1,22 @@
 package com.ualbany.daneeats.controller;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
-import com.ualbany.daneeats.service.VerificationTokenService;
-import com.ualbany.daneeats.model.Order;
-import com.ualbany.daneeats.model.Response;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.ualbany.daneeats.model.Role;
 import com.ualbany.daneeats.model.User;
+import com.ualbany.daneeats.model.UserRoleType;
 import com.ualbany.daneeats.service.OrderService;
 import com.ualbany.daneeats.service.UserService;
+import com.ualbany.daneeats.service.VerificationTokenService;
 import com.ualbany.daneeats.validator.UserValidator;
 
 @Controller
@@ -43,7 +47,15 @@ public class UserController {
         if (bindingResult.hasErrors()) {
             return "registration";
         }
-
+        Date now = new Date();
+        Role role = new Role();
+        role.setCreatedAt(now);
+        role.setUpdatedAt(now);
+        role.setRoleType(UserRoleType.CUSTOMER);
+        
+        userForm.addRole(role);
+        userForm.setCreatedAt(now);
+        userForm.setUpdatedAt(now);
         userService.save(userForm);
 
        model.addAttribute("verificationForm", userForm);

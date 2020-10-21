@@ -94,10 +94,7 @@ public class Order extends Persistable {
 	}
 	
 	public void setItems(List<OrderItem> items) {
-		for (OrderItem orderItem : items) {
-			orderItem.setOrder(this);
-			this.items.add(orderItem);
-		}
+		this.items = items;
 	}
 	
 	public void addOrderItem(OrderItem item) {

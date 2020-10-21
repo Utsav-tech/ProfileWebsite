@@ -17,7 +17,7 @@ public class ProfileService {
     	repository.save(p);
     }
 
-    public Profile findById(Integer id) {
+    public Profile findById(Long id) {
     	Optional<Profile> profile= repository.findById(id);
     	if(profile.isPresent())
     		return profile.get();

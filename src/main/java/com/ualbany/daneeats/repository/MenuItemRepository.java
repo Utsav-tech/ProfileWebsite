@@ -6,7 +6,7 @@ import java.util.List;
 
 import com.ualbany.daneeats.model.MenuItem;
 
-public interface MenuItemRepository extends JpaRepository<MenuItem, Integer> {
+public interface MenuItemRepository extends JpaRepository<MenuItem, Long> {
     MenuItem findByName(String name);
     List<MenuItem> findAll();
 }

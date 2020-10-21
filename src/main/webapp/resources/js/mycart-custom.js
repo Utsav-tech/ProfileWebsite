@@ -111,7 +111,7 @@ $(function () {
       });
       let order = {};
       order["customerId"] = 1;
-      order["price"] = total;
+      order["amount"] = total;
       order["destination"] = "Duch Quad";
       order["items"] = items;
       saveOrder(order);

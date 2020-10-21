@@ -2,8 +2,6 @@ package com.ualbany.daneeats.controller;
 
 import java.util.List;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,11 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ualbany.daneeats.model.Order;
-import com.ualbany.daneeats.model.Response;
-import com.ualbany.daneeats.model.User;
-import com.ualbany.daneeats.service.MenuItemService;
 import com.ualbany.daneeats.service.OrderService;
-import com.ualbany.daneeats.service.RestaurantService;
 
 @Controller
 @RequestMapping("/delivery")

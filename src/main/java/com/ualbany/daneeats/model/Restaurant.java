@@ -1,12 +1,6 @@
 package com.ualbany.daneeats.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 
 @Entity
 public class Restaurant extends Persistable {
@@ -20,6 +14,8 @@ public class Restaurant extends Persistable {
 	private String address2;
 
 	private String image;
+	
+	private String description;
 
 	public String getName() {
 		return name;
@@ -59,5 +55,13 @@ public class Restaurant extends Persistable {
 
 	public void setImage(String image) {
 		this.image = image;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 }

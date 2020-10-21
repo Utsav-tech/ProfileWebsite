@@ -20,7 +20,7 @@ public class RestaurantService {
     	repository.save(r);
     }
 
-    public Restaurant findById(Integer id) {
+    public Restaurant findById(Long id) {
     	Optional<Restaurant> restaurant= repository.findById(id);
     	if(restaurant.isPresent())
     		return restaurant.get();
@@ -28,7 +28,7 @@ public class RestaurantService {
     		return null;
     }
     
-    public List<MenuItem> findAllMenuItems(Integer id) {
+    public List<MenuItem> findAllMenuItems(Long id) {
     	List<MenuItem> menuItems= null;//repository.findById(id);
    		return menuItems;
     }

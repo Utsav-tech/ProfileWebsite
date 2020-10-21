@@ -220,7 +220,7 @@ code {
             </c:forEach>
         </table>
     </div><br><br>
-   <form method="GET" action="Action.jsp">
+   <form method="GET" action="${contextPath}/Action.jsp">
  	<input type="hidden" name="orderId" id="orderId" value="">
  	<input type="hidden" name="agentId" id="agentId" value="">
  	<input type="hidden" name="price" id="price" value="">

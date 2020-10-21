@@ -52,6 +52,6 @@ public class Role extends Persistable {
 	
 	@Override
 	public String toString() {
-		return "User:"+ user.getUserName() +" Role:"+ roleType.toString();
+		return "User:"+ user.getUsername() +" Role:"+ roleType.toString();
 	}
 }
