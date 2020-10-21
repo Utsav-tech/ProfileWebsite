@@ -173,42 +173,7 @@ code {
     </div>
   </div> 
 </div><br><br>
-
-<center>
- <table id="t01" >
-        <tr>
-            <th>OrderID</th>
-            <th>agentId</th>
-            <th>Price</th>
-            <th>Address</th>
-            <th>Status</th>
-            <th>Quantity</th>
-            <th>Action</th>
-        </tr>
-        <tr>
-            <td><p><%=request.getParameter("orderId")%></p></td>
-            <td><p><%=request.getParameter("agentId")%></p></td>
-            <td><p><%=request.getParameter("price")%></p></td>
-            <td><p><%=request.getParameter("address")%></p></td>
-            <td><p><%=request.getParameter("status")%></p></td>
-            <td><p><%=request.getParameter("quantity")%></p></td>
-            <td>
-            <form method="POST" action="${contextpath}/acceptorders" >
-            <input type="submit" value="accept" /><br><br>
-            </form>
-            <form action="${contextpath}/availableorders">
-            <label for="cars">Choose your reason:</label>
-            <select id="cars" name="cars">
-                <option value="1">Restaurant Closed</option>
-                <option value="2">Item unavailable</option>
-                <option value="3">Emergency</option>
-                <option value="4">others</option>
-            </select>
-            <input type="submit" value="decline"><br><br>
-            </form>
-            </td>
-        </tr>
-</table>
+<center><h3>Order in Progress.Will be Delivered Soon......</h3></center>
 </body>
 </html>
   
